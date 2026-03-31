@@ -66,7 +66,7 @@ export class RegisterComponent {
       this.router.navigate(['/dashboard']);
     } catch (error: unknown) {
       const message = error instanceof Error ? error.message : 'Registration failed.';
-      this.snackBar.open(this.getFriendlyError(message), 'Close', { duration: 4000 });
+      this.snackBar.open(this.getFriendlyError(message), 'Close', { duration: 5000 });
     } finally {
       this.loading.set(false);
     }
@@ -79,13 +79,22 @@ export class RegisterComponent {
       this.router.navigate(['/dashboard']);
     } catch (error: unknown) {
       const message = error instanceof Error ? error.message : 'Google sign-in failed.';
-      this.snackBar.open(this.getFriendlyError(message), 'Close', { duration: 4000 });
+      this.snackBar.open(this.getFriendlyError(message), 'Close', { duration: 5000 });
     } finally {
       this.loading.set(false);
     }
   }
 
   private getFriendlyError(message: string): string {
+    if (message.includes('already registered with Google')) {
+      return message;
+    }
+    if (message.includes('already registered with email')) {
+      return message;
+    }
+    if (message.includes('already registered')) {
+      return message;
+    }
     if (message.includes('email-already-in-use')) {
       return 'This email is already registered. Please sign in.';
     }
