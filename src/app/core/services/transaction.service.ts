@@ -9,7 +9,9 @@ import {
   deleteDoc,
   query,
   orderBy,
-  Timestamp
+  Timestamp,
+  WithFieldValue,
+  DocumentData
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Transaction } from '../models/transaction.model';
@@ -37,14 +39,14 @@ export class TransactionService {
     await addDoc(ref, {
       ...transaction,
       createdAt: Timestamp.now()
-    });
+    } as WithFieldValue<DocumentData>);
   }
 
   async updateTransaction(id: string, transaction: Partial<Transaction>): Promise<void> {
     const userId = this.authService.getCurrentUserId();
     if (!userId) throw new Error('User not authenticated');
     const docRef = doc(this.firestore, `users/${userId}/transactions/${id}`);
-    await updateDoc(docRef, transaction as Record<string, unknown>);
+    await updateDoc(docRef, transaction as WithFieldValue<DocumentData>);
   }
 
   async deleteTransaction(id: string): Promise<void> {
