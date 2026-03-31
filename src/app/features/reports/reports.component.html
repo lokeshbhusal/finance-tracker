@@ -1,0 +1,97 @@
+<div class="reports-container" *ngIf="!loading(); else loadingTpl">
+
+  <div class="page-header">
+    <h2>Reports & Analytics</h2>
+  </div>
+
+  <!-- Charts Row -->
+  <div class="charts-grid">
+    <mat-card class="chart-card">
+      <mat-card-header>
+        <mat-card-title>Monthly Income vs Expenses (12 months)</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="chart-container">
+          <canvas baseChart
+            [data]="barChartData()"
+            [options]="barChartOptions"
+            [type]="barChartType">
+          </canvas>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="chart-card">
+      <mat-card-header>
+        <mat-card-title>All-Time Expense Breakdown</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="chart-container" *ngIf="(pieChartData().datasets[0]?.data?.length ?? 0) > 0; else noData">
+          <canvas baseChart
+            [data]="pieChartData()"
+            [options]="pieChartOptions"
+            [type]="pieChartType">
+          </canvas>
+        </div>
+        <ng-template #noData>
+          <div class="empty-state">
+            <mat-icon>pie_chart</mat-icon>
+            <p>No expense data available</p>
+          </div>
+        </ng-template>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Monthly Summary Table -->
+  <mat-card class="table-card">
+    <mat-card-header>
+      <mat-card-title>Monthly Summary (Last 12 Months)</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="table-container">
+        <table mat-table [dataSource]="monthlySummaries()" class="summary-table">
+
+          <ng-container matColumnDef="month">
+            <th mat-header-cell *matHeaderCellDef>Month</th>
+            <td mat-cell *matCellDef="let row">{{row.label}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="income">
+            <th mat-header-cell *matHeaderCellDef>Income</th>
+            <td mat-cell *matCellDef="let row" class="income-cell">{{row.income | currency}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="expenses">
+            <th mat-header-cell *matHeaderCellDef>Expenses</th>
+            <td mat-cell *matCellDef="let row" class="expense-cell">{{row.expenses | currency}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="savings">
+            <th mat-header-cell *matHeaderCellDef>Savings</th>
+            <td mat-cell *matCellDef="let row" [class.income-cell]="row.savings >= 0" [class.expense-cell]="row.savings < 0">
+              {{row.savings | currency}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="savingsRate">
+            <th mat-header-cell *matHeaderCellDef>Savings Rate</th>
+            <td mat-cell *matCellDef="let row" [class.income-cell]="row.savingsRate >= 0" [class.expense-cell]="row.savingsRate < 0">
+              {{row.savingsRate}}%
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row"></tr>
+        </table>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<ng-template #loadingTpl>
+  <div class="loading-container">
+    <mat-spinner diameter="60"></mat-spinner>
+    <p>Loading reports...</p>
+  </div>
+</ng-template>

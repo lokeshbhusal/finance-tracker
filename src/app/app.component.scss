@@ -1,0 +1,109 @@
+.app-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.app-sidenav {
+  width: 240px;
+  background: #311b92;
+  color: white;
+
+  .sidenav-header {
+    display: flex;
+    align-items: center;
+    padding: 20px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    gap: 12px;
+
+    .logo-icon {
+      font-size: 32px;
+      width: 32px;
+      height: 32px;
+      color: #ffd740;
+    }
+
+    .app-name {
+      font-size: 18px;
+      font-weight: 500;
+      color: white;
+    }
+  }
+
+  mat-nav-list a {
+    color: rgba(255,255,255,0.8);
+    border-radius: 8px;
+    margin: 4px 8px;
+
+    &.active-link {
+      background: rgba(255,255,255,0.15);
+      color: white;
+    }
+
+    &:hover {
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+
+    mat-icon {
+      color: inherit;
+    }
+  }
+}
+
+.app-toolbar {
+  background: #4527a0 !important;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.user-menu-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: white !important;
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ffd740;
+  color: #311b92;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.user-name {
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.main-content {
+  padding: 24px;
+  min-height: calc(100vh - 64px);
+  background: #f5f5f5;
+
+  &.with-toolbar {
+    margin-top: 0;
+  }
+}
+
+.auth-layout {
+  mat-sidenav-content {
+    background: linear-gradient(135deg, #311b92 0%, #4527a0 50%, #7b1fa2 100%);
+  }
+}
+
+.spacer {
+  flex: 1 1 auto;
+}

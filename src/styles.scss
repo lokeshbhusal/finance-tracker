@@ -1,0 +1,46 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$finance-primary: mat.define-palette(mat.$deep-purple-palette, 700, 300, 900);
+$finance-accent: mat.define-palette(mat.$amber-palette, A200, A100, A400);
+$finance-warn: mat.define-palette(mat.$red-palette);
+
+$finance-theme: mat.define-light-theme((
+  color: (
+    primary: $finance-primary,
+    accent: $finance-accent,
+    warn: $finance-warn,
+  ),
+  typography: mat.define-typography-config(),
+  density: 0,
+));
+
+@include mat.all-component-themes($finance-theme);
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  background-color: #f5f5f5;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.text-success {
+  color: #4caf50;
+}
+
+.text-danger {
+  color: #f44336;
+}
+
+mat-card {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+  border-radius: 12px !important;
+}
