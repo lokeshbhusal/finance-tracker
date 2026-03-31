@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { BaseChartDirective } from 'ng2-charts';
-import { ChartData, ChartOptions, ChartType } from 'chart.js';
+import { ChartData, ChartOptions } from 'chart.js';
 import { Timestamp } from '@angular/fire/firestore';
 import { TransactionService } from '../../core/services/transaction.service';
 import { Transaction } from '../../core/models/transaction.model';
@@ -67,8 +67,8 @@ export class ReportsComponent implements OnInit {
     }
   };
 
-  barChartType: ChartType = 'bar';
-  pieChartType: ChartType = 'pie';
+  readonly barChartType = 'bar' as const;
+  readonly pieChartType = 'pie' as const;
 
   ngOnInit(): void {
     this.transactionService.getTransactions().subscribe(transactions => {
@@ -99,7 +99,6 @@ export class ReportsComponent implements OnInit {
 
     this.monthlySummaries.set(summaries);
 
-    // Bar chart
     this.barChartData.set({
       labels: summaries.map(s => s.label),
       datasets: [
@@ -108,7 +107,6 @@ export class ReportsComponent implements OnInit {
       ]
     });
 
-    // Pie chart for all-time expense categories
     const categoryMap = new Map<string, number>();
     transactions.filter(t => t.type === 'expense').forEach(t => {
       categoryMap.set(t.category, (categoryMap.get(t.category) ?? 0) + t.amount);
