@@ -7,12 +7,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartData, ChartOptions, ChartType } from 'chart.js';
-import { Chart, registerables } from 'chart.js';
 import { Timestamp } from '@angular/fire/firestore';
 import { TransactionService } from '../../core/services/transaction.service';
 import { Transaction } from '../../core/models/transaction.model';
-
-Chart.register(...registerables);
 
 interface MonthlySummary {
   month: string;

@@ -9,12 +9,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterLink } from '@angular/router';
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartData, ChartOptions, ChartType } from 'chart.js';
-import { Chart, registerables } from 'chart.js';
 import { TransactionService } from '../../core/services/transaction.service';
 import { Transaction } from '../../core/models/transaction.model';
 import { Timestamp } from '@angular/fire/firestore';
-
-Chart.register(...registerables);
 
 @Component({
   selector: 'app-dashboard',
