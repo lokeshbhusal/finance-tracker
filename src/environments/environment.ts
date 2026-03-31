@@ -1,11 +1,11 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyASHUh9FjvKh1qKfYrATueHyGdubo1eAcs",
+    authDomain: "finance-tracker-d0ec5.firebaseapp.com",
+    projectId: "finance-tracker-d0ec5",
+    storageBucket: "finance-tracker-d0ec5.firebasestorage.app",
+    messagingSenderId: "141095162582",
+    appId: "1:141095162582:web:e83b596b400a9fa31caf77"
   }
 };
