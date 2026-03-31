@@ -1,5 +1,5 @@
 import { Component, OnInit, inject, signal, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { CommonModule, CurrencyPipe, DecimalPipe } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,7 +8,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterLink } from '@angular/router';
 import { BaseChartDirective } from 'ng2-charts';
-import { ChartData, ChartOptions, ChartType } from 'chart.js';
+import { ChartData, ChartOptions } from 'chart.js';
 import { TransactionService } from '../../core/services/transaction.service';
 import { Transaction } from '../../core/models/transaction.model';
 import { Timestamp } from '@angular/fire/firestore';
@@ -28,7 +28,6 @@ import { Timestamp } from '@angular/fire/firestore';
     MatProgressSpinnerModule,
     BaseChartDirective,
     CurrencyPipe,
-    DecimalPipe,
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
@@ -68,8 +67,8 @@ export class DashboardComponent implements OnInit {
     }
   };
 
-  lineChartType: ChartType = 'line';
-  doughnutChartType: ChartType = 'doughnut';
+  readonly lineChartType = 'line' as const;
+  readonly doughnutChartType = 'doughnut' as const;
 
   ngOnInit(): void {
     this.transactionService.getTransactions().subscribe(transactions => {
