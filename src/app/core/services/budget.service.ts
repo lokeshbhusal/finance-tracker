@@ -8,7 +8,9 @@ import {
   updateDoc,
   deleteDoc,
   query,
-  where
+  where,
+  WithFieldValue,
+  DocumentData
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Budget } from '../models/transaction.model';
@@ -35,14 +37,14 @@ export class BudgetService {
 
   async setBudget(budget: Omit<Budget, 'id'>): Promise<void> {
     const ref = this.getUserBudgetsRef();
-    await addDoc(ref, budget);
+    await addDoc(ref, budget as WithFieldValue<DocumentData>);
   }
 
   async updateBudget(id: string, data: Partial<Budget>): Promise<void> {
     const userId = this.authService.getCurrentUserId();
     if (!userId) throw new Error('User not authenticated');
     const docRef = doc(this.firestore, `users/${userId}/budgets/${id}`);
-    await updateDoc(docRef, data as Record<string, unknown>);
+    await updateDoc(docRef, data as WithFieldValue<DocumentData>);
   }
 
   async deleteBudget(id: string): Promise<void> {
