@@ -1,0 +1,25 @@
+.transaction-form {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 8px;
+  min-width: 360px;
+
+  @media (max-width: 480px) {
+    min-width: unset;
+  }
+}
+
+.full-width {
+  width: 100%;
+}
+
+mat-dialog-content {
+  overflow-y: auto;
+  max-height: 80vh;
+}
+
+mat-dialog-actions {
+  padding: 16px 24px;
+  gap: 8px;
+}

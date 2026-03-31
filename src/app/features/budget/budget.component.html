@@ -1,0 +1,115 @@
+<div class="budget-container">
+  <div class="page-header">
+    <h2>Budget</h2>
+    <div class="header-controls">
+      <input type="month" class="month-picker" [value]="selectedMonth()" (change)="onMonthChange($any($event.target).value)">
+      <button mat-raised-button color="primary" (click)="showAddForm.set(!showAddForm())">
+        <mat-icon>{{showAddForm() ? 'close' : 'add'}}</mat-icon>
+        {{showAddForm() ? 'Cancel' : 'Add Budget'}}
+      </button>
+    </div>
+  </div>
+
+  <!-- Add Budget Form -->
+  <mat-card class="add-form-card" *ngIf="showAddForm()">
+    <mat-card-header>
+      <mat-card-title>Set Budget Limit</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="addForm" (ngSubmit)="addBudget()" class="add-form">
+        <mat-form-field appearance="outline">
+          <mat-label>Category</mat-label>
+          <mat-select formControlName="category">
+            <mat-option *ngFor="let cat of expenseCategories" [value]="cat">{{cat}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="addForm.get('category')?.hasError('required')">Required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Monthly Limit ($)</mat-label>
+          <span matTextPrefix>$&nbsp;</span>
+          <input matInput type="number" formControlName="limit" placeholder="0.00" min="1">
+          <mat-error *ngIf="addForm.get('limit')?.hasError('required')">Required</mat-error>
+          <mat-error *ngIf="addForm.get('limit')?.hasError('min')">Must be > 0</mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="addForm.invalid">
+          <mat-icon>save</mat-icon> Save Budget
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Loading -->
+  <div class="loading-container" *ngIf="loading()">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
+
+  <!-- Budget Cards Grid -->
+  <div class="budget-grid" *ngIf="!loading()">
+    <mat-card class="budget-card" *ngFor="let budget of budgets()">
+      <mat-card-content>
+        <div class="budget-card-header">
+          <div class="category-info">
+            <mat-icon class="cat-icon" [class.safe]="budget.status === 'safe'" [class.warning]="budget.status === 'warning'" [class.danger]="budget.status === 'danger'">
+              shopping_bag
+            </mat-icon>
+            <span class="category-name">{{budget.category}}</span>
+          </div>
+          <div class="budget-actions">
+            <button mat-icon-button (click)="startEdit(budget)" *ngIf="editingId() !== budget.id" matTooltip="Edit">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteBudget(budget)" *ngIf="editingId() !== budget.id" matTooltip="Delete">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <!-- Edit mode -->
+        <form [formGroup]="editForm" (ngSubmit)="saveEdit(budget)" class="edit-row" *ngIf="editingId() === budget.id">
+          <mat-form-field appearance="outline" class="edit-field">
+            <mat-label>New Limit ($)</mat-label>
+            <span matTextPrefix>$&nbsp;</span>
+            <input matInput type="number" formControlName="limit" min="1">
+          </mat-form-field>
+          <button mat-icon-button color="primary" type="submit" [disabled]="editForm.invalid" matTooltip="Save">
+            <mat-icon>check</mat-icon>
+          </button>
+          <button mat-icon-button type="button" (click)="cancelEdit()" matTooltip="Cancel">
+            <mat-icon>close</mat-icon>
+          </button>
+        </form>
+
+        <!-- Progress info -->
+        <div class="budget-amounts" *ngIf="editingId() !== budget.id">
+          <span class="spent">{{budget.spent | currency}} spent</span>
+          <span class="limit">of {{budget.limit | currency}}</span>
+        </div>
+
+        <mat-progress-bar
+          [color]="getProgressColor(budget.status)"
+          mode="determinate"
+          [value]="budget.percentage"
+          class="budget-progress">
+        </mat-progress-bar>
+
+        <div class="budget-footer" *ngIf="editingId() !== budget.id">
+          <span class="percentage" [class.safe]="budget.status === 'safe'" [class.warning]="budget.status === 'warning'" [class.danger]="budget.status === 'danger'">
+            {{budget.percentage | number:'1.0-0'}}% used
+          </span>
+          <span class="remaining" [class.over-budget]="budget.spent > budget.limit">
+            {{budget.spent > budget.limit ? 'Over by ' + ((budget.spent - budget.limit) | currency) : (budget.limit - budget.spent | currency) + ' remaining'}}
+          </span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Empty state -->
+    <div class="empty-budgets" *ngIf="budgets().length === 0">
+      <mat-icon>account_balance_wallet</mat-icon>
+      <h3>No budgets set for this month</h3>
+      <p>Click "Add Budget" to set spending limits for your categories.</p>
+    </div>
+  </div>
+</div>
