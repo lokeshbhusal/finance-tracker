@@ -1,89 +1,80 @@
-# 💰 Finance Tracker
+# FinTrack — Personal Finance Tracker
 
-A production-ready **Personal Finance Tracker** web application built with **Angular 17+** and **Firebase**.
+A personal finance tracking app I built with **Angular 19** and **Firebase** to manage expenses, budgets, and get insights into spending habits.
 
-![Angular](https://img.shields.io/badge/Angular-17+-red?style=flat-square&logo=angular)
-![Firebase](https://img.shields.io/badge/Firebase-10-orange?style=flat-square&logo=firebase)
-![Angular Material](https://img.shields.io/badge/Angular%20Material-17-blue?style=flat-square)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.4-blue?style=flat-square&logo=typescript)
+## Features
 
-## ✨ Features
+- **Authentication** — Email/Password and Google Sign-In via Firebase Auth
+- **Dashboard** — Personalized greeting, summary cards, income vs expenses chart, category breakdown
+- **Transactions** — Add, edit, delete transactions with search, filter, and sort
+- **Budget Management** — Set monthly category budgets with progress tracking
+- **Reports** — Monthly summaries and category-level analytics
 
-- 🔐 **Authentication** — Email/Password + Google Sign-In
-- 📊 **Dashboard** — Summary cards, income vs expenses chart, category breakdown
-- 💸 **Transactions** — Full CRUD with search, filter, and sort
-- 🎯 **Budget** — Set monthly limits with visual progress bars
-- 📈 **Reports** — Monthly summaries and category analytics
+## Tech Stack
 
-## 🛠️ Tech Stack
+- Angular 19 with standalone components
+- Angular Material for UI
+- Firebase (Auth + Firestore)
+- Chart.js + ng2-charts for data visualization
+- SCSS for styling
 
-| Technology | Version |
-|---|---|
-| Angular | 17+ |
-| Angular Material | 17 |
-| Firebase SDK | 10 |
-| AngularFire | 17 |
-| ng2-charts | 5 |
-| Chart.js | 4 |
+## Recent Changes
 
-## 🚀 Setup Instructions
+- Added personalized greeting banner on dashboard (time-based: morning/afternoon/evening)
+- Renamed app branding to "FinTrack"
+- Added footer with author credit
+- Added new transaction categories: "Side Hustle" (income), "Subscriptions" (expense)
+- Updated loading messages for better UX
+- General cleanup and polish
+
+## Getting Started
 
 ### Prerequisites
-- Node.js 18+
-- Angular CLI 17: `npm install -g @angular/cli`
-- Firebase account
 
-### 1. Clone the Repository
+- Node.js 18+
+- Angular CLI: `npm install -g @angular/cli`
+- A Firebase project with Auth and Firestore enabled
+
+### Setup
+
 ```bash
 git clone https://github.com/lokeshbhusal/finance-tracker.git
 cd finance-tracker
-```
-
-### 2. Install Dependencies
-```bash
 npm install
 ```
 
-### 3. Configure Firebase
+Add your Firebase config to `src/environments/environment.ts`, then:
 
-1. Go to [Firebase Console](https://console.firebase.google.com/)
-2. Create a new project
-3. Enable **Authentication** (Email/Password + Google)
-4. Create a **Firestore Database**
-5. Copy your Firebase config to `src/environments/environment.ts`
-
-### 4. Run the App
 ```bash
 ng serve
 ```
+
 Open http://localhost:4200
 
-## 🚀 Deploy to Firebase Hosting
+### Deploy
 
 ```bash
-npm run build
-firebase login
+ng build
 firebase deploy
 ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```
-src/
-├── app/
-│   ├── core/
-│   │   ├── models/        # Data interfaces
-│   │   ├── services/      # Firebase services
-│   │   └── guards/        # Route protection
-│   └── features/
-│       ├── auth/          # Login & Register
-│       ├── dashboard/     # Overview & charts
-│       ├── transactions/  # CRUD operations
-│       ├── budget/        # Budget management
-│       └── reports/       # Analytics
-└── environments/          # Firebase config
+src/app/
+├── core/
+│   ├── models/        # TypeScript interfaces
+│   ├── services/      # Firebase service layer
+│   └── guards/        # Auth route guard
+├── features/
+│   ├── auth/          # Login & Register pages
+│   ├── dashboard/     # Main overview with charts
+│   ├── transactions/  # CRUD for transactions
+│   ├── budget/        # Budget management
+│   └── reports/       # Spending analytics
+└── environments/      # Firebase config
 ```
 
-## 📄 License
+## License
 
 MIT

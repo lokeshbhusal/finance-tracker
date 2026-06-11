@@ -6,7 +6,7 @@
     *ngIf="!isAuthPage()">
     <div class="sidenav-header">
       <mat-icon class="logo-icon">account_balance</mat-icon>
-      <span class="app-name">Finance Tracker</span>
+      <span class="app-name">FinTrack</span>
     </div>
     <mat-nav-list>
       <a mat-list-item
@@ -42,5 +42,9 @@
     <div class="main-content" [class.with-toolbar]="!isAuthPage()">
       <router-outlet></router-outlet>
     </div>
+
+    <footer class="app-footer" *ngIf="!isAuthPage()">
+      <span>Built by Lokesh Bhusal</span>
+    </footer>
   </mat-sidenav-content>
 </mat-sidenav-container>

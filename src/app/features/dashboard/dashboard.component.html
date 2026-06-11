@@ -1,5 +1,11 @@
 <div class="dashboard-container" *ngIf="!loading(); else loadingTpl">
 
+  <!-- Welcome Banner -->
+  <div class="welcome-banner">
+    <h1>{{getGreeting()}}</h1>
+    <p>Here's your financial overview for {{getCurrentMonthName()}}</p>
+  </div>
+
   <!-- Summary Cards -->
   <div class="summary-grid">
     <mat-card class="summary-card balance">
@@ -122,6 +128,6 @@
 <ng-template #loadingTpl>
   <div class="loading-container">
     <mat-spinner diameter="60"></mat-spinner>
-    <p>Loading your financial data...</p>
+    <p>Crunching your numbers...</p>
   </div>
 </ng-template>

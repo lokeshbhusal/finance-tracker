@@ -1,1 +1,39 @@
-{\n  "name": "finance-tracker",\n  "version": "0.0.0",\n  "scripts": {\n    "ng": "ng",\n    "start": "ng serve",\n    "build": "ng build",\n    "watch": "ng build --watch --configuration development",\n    "test": "ng test"\n  },\n  "private": true,\n  "dependencies": {\n    "@angular/animations": "^19.2.6",\n    "@angular/cdk": "^19.2.6",\n    "@angular/common": "^19.2.6",\n    "@angular/compiler": "^19.2.6",\n    "@angular/core": "^19.2.6",\n    "@angular/fire": "^18.0.1",\n    "@angular/forms": "^19.2.6",\n    "@angular/material": "^19.2.6",\n    "@angular/platform-browser": "^19.2.6",\n    "@angular/platform-browser-dynamic": "^19.2.6",\n    "@angular/router": "^19.2.6",\n    "chart.js": "^4.4.0",\n    "ng2-charts": "^6.0.1",\n    "firebase": "^10.14.1",\n    "rxjs": "~7.8.0",\n    "tslib": "^2.3.0",\n    "zone.js": "~0.14.0"\n  },\n  "devDependencies": {\n    "@angular-devkit/build-angular": "^19.2.6",\n    "@angular/cli": "~19.2.0",\n    "@angular/compiler-cli": "^19.2.6",\n    "typescript": "~5.7.3"\n  }\n}
+{
+  "name": "finance-tracker",
+  "version": "1.0.0",
+  "description": "Personal finance tracking app built with Angular and Firebase",
+  "author": "Lokesh Bhusal",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^19.2.6",
+    "@angular/cdk": "^19.2.6",
+    "@angular/common": "^19.2.6",
+    "@angular/compiler": "^19.2.6",
+    "@angular/core": "^19.2.6",
+    "@angular/fire": "^18.0.1",
+    "@angular/forms": "^19.2.6",
+    "@angular/material": "^19.2.6",
+    "@angular/platform-browser": "^19.2.6",
+    "@angular/platform-browser-dynamic": "^19.2.6",
+    "@angular/router": "^19.2.6",
+    "chart.js": "^4.4.0",
+    "ng2-charts": "^6.0.1",
+    "firebase": "^10.14.1",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.14.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^19.2.6",
+    "@angular/cli": "~19.2.0",
+    "@angular/compiler-cli": "^19.2.6",
+    "typescript": "~5.7.3"
+  }
+}

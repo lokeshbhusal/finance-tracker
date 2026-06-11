@@ -24,6 +24,7 @@ export const INCOME_CATEGORIES = [
   'Freelance',
   'Investment',
   'Business',
+  'Side Hustle',
   'Gift',
   'Other Income'
 ];
@@ -38,6 +39,7 @@ export const EXPENSE_CATEGORIES = [
   'Shopping',
   'Education',
   'Travel',
+  'Subscriptions',
   'Personal Care',
   'Other Expense'
 ];
